@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
-
 import TasksList from './components/TaskList';
+
+const API_BASE = "https://simple-mern-backend.onrender.com";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
   const getTasks = useCallback(() => {
-    fetch('/api/tasks')
+    fetch(`${API_BASE}/api/tasks`)
       .then(res => res.json())
       .then(setTasks);
-  });
+  }, []);
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [getTasks]);
 
   const clickAddTask = event => {
     event.preventDefault();
 
-    fetch('/api/tasks/add', {
+    fetch(`${API_BASE}/api/tasks/add`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: newTaskTitle }),
