@@ -1,4 +1,4 @@
-# 🔧 Simple MERN (Forked by Yusuf Bolden)
+# 🔧 Simple MERN
 
 A full-stack MERN (MongoDB, Express, React, Node.js) application for managing tasks. This project was forked from [jmsv/simple-mern](https://github.com/jmsv/simple-mern) and configured for deployment using Render.
 
