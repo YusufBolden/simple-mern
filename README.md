@@ -1,51 +1,157 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/14852491/64910580-cc163700-d70f-11e9-99ec-8c49095a8c3b.png" />
-  <br/>
-  the simplest MERN (MongoDB, Express, React and Node) setup
-</p>
+# 🔧 Simple MERN (Forked by Yusuf Bolden)
 
-## Why?
+A full-stack MERN (MongoDB, Express, React, Node.js) application for managing tasks. This project was forked from [jmsv/simple-mern](https://github.com/jmsv/simple-mern) and configured for deployment using Render.
 
-While there are many MERN starters on the interwebs already, I've struggled to find a 'minimal viable' MERN app. Existing examples usually involve other libraries and tools such as Redux, React Router, Typescript, Docker etc. These are all great things, but add unnecessary complexity when you just want to start simple.
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white&style=for-the-badge)
+![Express](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white&style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white&style=for-the-badge)
+![Render](https://img.shields.io/badge/-Render-46E3B7?logo=render&logoColor=white&style=for-the-badge)
 
-This MERN starter, `simple-mern` aims to be the minimum you need to get started with the stack.
 
-## Getting Started
+---
 
-### Development
+## 🚀 Live Demo
 
-1. Install MongoDB and run on default port `27017`
-2. `npm install` in both root directory and `client` directory
-3. `npm start` in both root directory and `client` directory
-4. Head to [localhost:3000](http://localhost:3000) to see the 'My Tasks' app
+- **Frontend** (Static Site): [https://simple-mern-frontend.onrender.com](https://simple-mern-frontend.onrender.com)
+- **Backend** (Web Service API): [https://simple-mern-backend.onrender.com/api/tasks](https://simple-mern-backend.onrender.com/api/tasks)
 
-### Production
+---
+
+## ✨ Features
+
+- 📝 Add tasks with a simple UI
+- 🗃 Tasks persist using MongoDB Atlas
+- 🚀 Frontend and backend fully deployed on Render
+- 🔄 Real-time task display
+- 🔐 API communication over HTTPS with CORS enabled
+
+---
+## 🖥️ Local Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YusufBolden/simple-mern.git
+cd simple-mern
+```
+
+### 2. Install Backend Dependencies
 
 ```bash
 npm install
-npm run build
-npm run start:prod
 ```
 
-The production app will be running at [localhost:5000](http://localhost:5000/).
+### 3. Set Up Environment Variables
 
-## Extend `simple-mern`
+Create a `.env` file at the **project root**:
 
-While this boilerplate was designed to be as minimal as possible, support for other tech could be added _in their own branches_.
+```env
+PORT=5000
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority
+```
 
-### Current Extensions
+### 4. Run the Application Locally
 
-- [`with-axios`](https://github.com/jmsv/simple-mern/tree/with-axios): Replaces Axios with fetch - [@leonlafa](https://github.com/leonlafa)
-- [`with-react-router`](https://github.com/jmsv/simple-mern/tree/with-react-router): Adds React Router - [@leonlafa](https://github.com/leonlafa)
-- [`with-material-ui`](https://github.com/jmsv/simple-mern/tree/with-material-ui): Adds Material UI - [@leonlafa](https://github.com/leonlafa)
-- [`with-docker`](https://github.com/jmsv/simple-mern/tree/with-docker): Adds Docker & Docker Compose - [@alejandrotoga02](https://github.com/alejandrotoga02)
-- [`with-redux`](https://github.com/jmsv/simple-mern/tree/with-redux): Adds Redux for state management - [@rahulSinha-01](https://github.com/rahulSinha-01)
+```bash
+npm run dev
+```
 
-### Ideas for Future Extensions
+### 5. Run Frontend Locally (Optional)
 
-- Replace JavaScript with TypeScript
-- Multi-user setup with social auth (e.g. Google, Facebook etc. login using Passport)
-- [Redux](https://redux.js.org) or [MobX](https://mobx.js.org) global state management for tasks
-- Static site generator using [GatsbyJS](https://www.gatsbyjs.org/) or [Next.js](https://nextjs.org/)
+```bash
+cd client
+npm install
+npm start
+```
 
-If you'd like to add support for any of the above or something else, please open an [issue](https://github.com/jmsv/simple-mern/issues) letting me know, and I'll create a new branch to base the PR against.
+---
+
+## ☁️ Deployment Instructions (Render)
+
+### 🔹 Backend – Web Service
+
+1. Go to [https://dashboard.render.com](https://dashboard.render.com)
+2. Click **“New → Web Service”**
+3. Connect your GitHub and select this repo
+4. **Settings**:
+
+| Field             | Value            |
+|------------------|------------------|
+| Root Directory   | *leave blank*    |
+| Build Command    | `npm install`    |
+| Start Command    | `node index.js`  |
+| Environment      | Node             |
+
+5. **Environment Variables**:
+
+```env
+MONGODB_URI=your_mongo_uri
+PORT=10000
+```
+
+6. Deploy — copy the backend URL (used in frontend)
+
+### 🔹 Frontend – Static Site
+
+1. Go to **Render → New → Static Site**
+2. Select the same repo
+3. **Settings**:
+
+| Field             | Value                          |
+|------------------|----------------------------------|
+| Root Directory   | `client`                         |
+| Build Command    | `npm install && npm run build`   |
+| Publish Directory| `build`                          |
+
+4. (Optional) **Environment Variable**
+
+| Key           | Value                      |
+|---------------|----------------------------|
+| `NODE_OPTIONS`| `--openssl-legacy-provider`|
+
+5. Deploy — copy the frontend URL
+
+---
+
+## 🔄 Connecting Frontend to Backend
+
+In `client/src/App.js`, use:
+
+```js
+const API_BASE = "https://simple-mern-backend.onrender.com";
+```
+
+Then redeploy the static site.
+
+---
+
+## 🧪 API Endpoints
+
+| Method | Endpoint                | Description         |
+|--------|-------------------------|---------------------|
+| GET    | `/api/tasks`            | Fetch all tasks     |
+| POST   | `/api/tasks/add`        | Add a new task      |
+
+---
+
+## 🛡 CORS Setup
+
+To enable CORS in the backend, add this to `index.js`:
+
+```js
+const cors = require('cors');
+app.use(cors());
+```
+
+---
+
+## 🧑🏿‍💻 Author
+
+Created by **Yusuf Bolden**. Feedback and collaboration welcome!
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
